@@ -78,7 +78,9 @@ vtk_module_scan(
   ENABLE_TESTS     "${BUILD_TESTING}")
 
 #TODO: Workaround for vtkRenderingOpenVR not finding the other external module vtkRenderingVR
-include("${CMAKE_BINARY_DIR}/vtkRenderingVR-build/lib/cmake/vtk/vtkRenderingVR-targets.cmake")  
+if (${PROJECT_NAME} STREQUAL "vtkRenderingOpenVR")
+  include(${vtkRenderingVR_TARGETS})
+endif()
 
 string(TOLOWER ${PROJECT_NAME} _project_name_lc)
 vtk_module_build(
